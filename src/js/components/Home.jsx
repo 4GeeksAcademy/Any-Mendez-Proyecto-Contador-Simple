@@ -1,28 +1,45 @@
 import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import ReactDOM from 'react-dom/client';
+import {useState} from "react";
 
 //create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-            
+	const [props,setProps] = useState({
+		digitUno : 0,
+		digitDos : 0,
+		digitTres : 0,
+		digitCuatro : 0,
+		digitCinco : 0,
+		digitSeis : 0,
+	});
+	let counter=0;
+	
+	setInterval(function(){
+		setProps({ ...props, digitSeis : Math.floor(counter/1000000)});
+		setProps({ ...props, digitCinco : Math.floor(counter/100000)});
+		setProps({ ...props, digitCuatro : Math.floor(counter/10000)});
+		setProps({ ...props, digitTres : Math.floor(counter/1000)});
+		setProps({ ...props, digitDos : Math.floor(counter/100)});
+		setProps({ ...props, digitUno : Math.floor(counter/10)});
+		counter++;
+	}, 100);
 
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+
+
+		return (
+			<div className="bigCounter d-inline-block fs-20">
+				<div className="calendar">
+					<i className="far fa-clock"></i>
+				</div>
+				<div className="seis">{props.digitSeis}</div>
+				<div className="cinco">{props.digitCinco}</div>
+				<div className="cuatro">{props.digitCuatro}</div>
+				<div className="tres">{props.digitTres}</div>
+				<div className="dos">{props.digitDos}</div>
+				<div className="uno">{props.digitUno}</div>
+			</div>
+		);
+
 };
 
 export default Home;
